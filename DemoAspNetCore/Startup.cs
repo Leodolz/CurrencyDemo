@@ -26,7 +26,7 @@ namespace DemoAspNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(c => {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://localhost:3000"));
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
                 //c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()); For any source 
             });
                 services.AddControllers();
@@ -35,7 +35,7 @@ namespace DemoAspNetCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+           
             //app.UseCors(options => options.AllowAnyOrigin()); For any source
             if (env.IsDevelopment())
             {
@@ -45,6 +45,7 @@ namespace DemoAspNetCore
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthorization();
 

@@ -23,7 +23,7 @@ namespace DemoAspNetCore.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename="+ (Environment.CurrentDirectory) + "\\AppData\\ApiDB.mdf;Integrated Security=True;Connect Timeout=30");
+                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename="+ (Environment.CurrentDirectory) + "\\Data\\ApiDB.mdf;Integrated Security=True;Connect Timeout=30");
             }
         }
 
@@ -37,7 +37,7 @@ namespace DemoAspNetCore.DAL
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(18, 5)");
+                entity.Property(e => e.Amount).HasColumnType("Money");
 
                 entity.Property(e => e.CurrencyCode)
                     .HasMaxLength(50)
